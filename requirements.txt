@@ -1,0 +1,6 @@
+django
+django-environ
+google-generativeai
+pillow
+django-tailwind
+python-dotenv

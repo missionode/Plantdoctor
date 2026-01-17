@@ -31,7 +31,7 @@ SECRET_KEY = env('SECRET_KEY', default='django-insecure-default-key-change-this-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "[::1]"]
 
 
 # Application definition
@@ -141,5 +141,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Custom User Model
 AUTH_USER_MODEL = 'users.User'
+
+LOGIN_URL = 'users:login'
+LOGIN_REDIRECT_URL = 'diagnose:dashboard'
+LOGOUT_REDIRECT_URL = 'core:index'
 
 GEMINI_API_KEY = env('GEMINI_API_KEY', default='')

@@ -31,7 +31,16 @@ SECRET_KEY = env('SECRET_KEY', default='django-insecure-default-key-change-this-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "[::1]"]
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "[::1]",
+    "teodoro-peart-devora.ngrok-free.dev",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://teodoro-peart-devora.ngrok-free.dev",
+]
 
 
 # Application definition

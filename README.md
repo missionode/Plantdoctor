@@ -62,9 +62,9 @@ Plant Doctor is an AI-powered web application that helps users diagnose plant di
 
 ## Tech Stack
 
-*   **Backend:** Django 5.0
+*   **Backend:** Django 6.0.1
 *   **Frontend:** HTML, Tailwind CSS
-*   **AI Model:** Google Gemini 1.5 Flash
+*   **AI Model:** Google Gemini 1.5 Flash (`gemini-flash-latest`)
 *   **Database:** SQLite (Default)
 
 ## License

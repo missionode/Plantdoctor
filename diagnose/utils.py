@@ -1,13 +1,13 @@
-import google.generativeai as genai
+from google import genai
 from django.conf import settings
 import json
 import PIL.Image
 
 def analyze_plant_image(image_path):
-    genai.configure(api_key=settings.GEMINI_API_KEY)
+    client = genai.Client(api_key=settings.GEMINI_API_KEY)
     
-    # Use gemini-flash-latest
-    model = genai.GenerativeModel('gemini-flash-latest')
+    # Use gemini-flash-latest for better compatibility
+    model_id = 'gemini-flash-latest'
     
     img = PIL.Image.open(image_path)
     
@@ -32,10 +32,13 @@ def analyze_plant_image(image_path):
     Ensure prices are in INR (₹) and products are available in India.
     """
     
-    response = model.generate_content([prompt, img])
-    
     try:
-        # Extract JSON from response (sometimes Gemini wraps it in ```json ... ```)
+        response = client.models.generate_content(
+            model=model_id,
+            contents=[prompt, img]
+        )
+        
+        # Extract JSON from response
         text = response.text
         print(f"AI Raw Response: {text}")
         
@@ -58,7 +61,7 @@ def analyze_plant_image(image_path):
         return {
             "disease_name": "Unknown Issue",
             "confidence": 0.0,
-            "description": "Could not analyze the image properly.",
+            "description": f"Could not analyze the image properly. Error: {str(e)}",
             "immediate_action": "Try taking a clearer photo.",
             "long_term_care": "Ensure good lighting.",
             "recommended_products": []

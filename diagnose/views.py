@@ -83,7 +83,13 @@ def start_analysis(request, scan_id):
             print(f"Created new disease entry: {disease.name}")
         
         scan.disease = disease
-        scan.confidence = result.get('confidence', 0.0)
+        
+        # Normalize confidence to 0-100
+        conf = result.get('confidence', 0.0)
+        if conf <= 1.0:
+            conf *= 100
+        scan.confidence = conf
+        
         scan.save()
         
         print(f"Scan {scan.id} updated successfully. Redirecting to result page.")
